@@ -1,0 +1,12 @@
+Grafo: complete_graph(50)
+Melhor fitness: 149
+Tempo de execução: 4.3206 segundos
+
+Grafo: complete_graph(100)
+Melhor fitness: 299
+Tempo de execução: 32.6989 segundos
+
+Grafo: complete_bipartite_graph(40, 30)
+Melhor fitness: 150
+Tempo de execução: 12.0593 segundos
+
