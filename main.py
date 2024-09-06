@@ -52,7 +52,6 @@ def run_experiment(graph_name, graph, population_size, generations, crossover_ra
 def main():
 
     file_name = "result.txt"
-    open(file_name, 'w').close()
 
     population_size = 20
     generations = 100
@@ -76,22 +75,29 @@ def main():
         ("grid_2d_graph(7, 6)", nx.grid_2d_graph(7, 6)),
         ("grid_2d_graph(3, 35)", nx.grid_2d_graph(3, 35)),
     ]
+    
 
     # Executa o algoritmo genético para os grafos da biblioteca NetworkX
     for graph_name, graph in graphs:
+        
+        # Gerar um mapeamento de coordenadas (i, j) para inteiros
+        mapping = {node: i for i, node in enumerate(graph.nodes())}
+
+        # Renomeie os nós no gráfico usando o mapeamento
+        graph = nx.relabel_nodes(graph, mapping)
         run_experiment(graph_name, graph, population_size, generations, crossover_rate, mutation_rate, elitism_rate, file_name)
 
     # # Grafos gerados a partir dos arquivos.
-    # file_graphs = [
-    #     ("Grafo do arquivo 1", create_graph_from_file("dsjc250.5.col", False)),
-    #     ("Grafo do arquivo 2", create_graph_from_file("dsjc500.1.col", False)),
-    #     ("Grafo do arquivo 3", create_graph_from_file("dsjc500.5.col", False)),
-    #     ("Grafo do arquivo 4", create_graph_from_file("dsjc1000.1.col", False)),
-    # ]
+    file_graphs = [
+        ("Grafo do arquivo 1", create_graph_from_file("dsjc250.5.col", False)),
+        ("Grafo do arquivo 2", create_graph_from_file("dsjc500.1.col", False)),
+        ("Grafo do arquivo 3", create_graph_from_file("dsjc500.5.col", False)),
+        ("Grafo do arquivo 4", create_graph_from_file("dsjc1000.1.col", False)),
+    ]
 
-    # # # Executa o algoritmo genético para os grafos dos arquivos
-    # for graph_name, graph in file_graphs:
-    #     run_experiment(graph_name, graph, population_size, generations, crossover_rate, mutation_rate, elitism_rate, file_name)
+    # # Executa o algoritmo genético para os grafos dos arquivos
+    for graph_name, graph in file_graphs:
+        run_experiment(graph_name, graph, population_size, generations, crossover_rate, mutation_rate, elitism_rate, file_name)
 
 
 # Executa a função main.
